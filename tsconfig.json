@@ -3,6 +3,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@commons": ["./src/app/commons/index.ts"],
+      "@products": ["./src/app/productos/index.ts"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

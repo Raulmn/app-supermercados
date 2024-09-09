@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <!-- <span> {{ config.appName }} </span> -->
+    <span> App Name </span>
+    <span class="spacer"></span>
+    
+    @for (item of menuItems; track $index) {
+    
+        <a mat-button [routerLink]="item.url" class="p-3">{{ item.label }}</a>
+    
+    }
+
+</mat-toolbar>

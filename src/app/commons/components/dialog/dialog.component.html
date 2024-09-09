@@ -1,0 +1,10 @@
+<div class="{{data.type}}">
+    <h2 mat-dialog-title>{{ data.title }}</h2>
+</div>
+<mat-dialog-content class="mb-2">
+    <span>{{ data.description }}</span>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button class="bg-danger" mat-flat-button [mat-dialog-close]="true">Eliminar</button>
+</mat-dialog-actions>

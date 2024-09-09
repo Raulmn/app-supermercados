@@ -1,0 +1,54 @@
+<section>
+
+    <ul class="row">
+        @for (product of productsService.productsList(); track product.id) {
+            <div class="col-lg-4 col-md-6 col-xs-12 p-2">
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        
+                        <mat-card-title-group>
+                            <mat-card-title>
+                                {{ (product.name.length > 25) ?
+                                   (product.name | slice:0:25) + '...' :
+                                   (product.name)
+                                }}
+                            </mat-card-title>
+                            <mat-card-subtitle>Categoria</mat-card-subtitle>
+                            <mat-card-subtitle>{{ product.unitPrice | currency:'EUR' }}</mat-card-subtitle>
+                            <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+                        </mat-card-title-group>
+
+                    </mat-card-header>
+                    <mat-card-content>
+                        
+                        <mat-chip-set>
+                            @if(product.unitsInStock > 20) {
+                            <mat-chip class="bg-success">{{ product.unitsInStock }} en stock</mat-chip>
+                            } @else if (product.unitsInStock < 20 && product.unitsInStock> 0) {
+                                <mat-chip class="bg-warn">{{ product.unitsInStock }} en stock</mat-chip>
+                                } @else {
+                                <mat-chip class="bg-danger">Fuera de Stock</mat-chip>
+                                }
+                        </mat-chip-set>
+                        
+                        <span>
+                            {{ (product.description.length > 80) ? 
+                               (product.description | slice:0:80) + '...' : 
+                               (product.description)
+                            }}
+                        </span>
+                        
+                    </mat-card-content>
+                    <mat-card-actions align="end">
+                        
+                        <button class="m-2" [routerLink]="['/productos/edit', product.id]" mat-flat-button >Editar</button>
+                        <button class="m-2 bg-danger" mat-flat-button (click)="accionDelete(product)">Borrar</button>
+
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+        }
+    </ul>
+
+</section>

@@ -1,0 +1,158 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "categoryId": 2,
+      "name": "Chai",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": "24",
+      "unitsInStock": 53
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "name": "Chang",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": "21",
+      "unitsInStock": 17
+    },
+    {
+      "id": 4,
+      "categoryId": 1,
+      "name": "Chef Anton's Cajun Seasoning",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": "222",
+      "unitsInStock": 53
+    },
+    {
+      "id": 5,
+      "categoryId": 2,
+      "name": "Chef Anton's Gumbo Mix",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": "21",
+      "unitsInStock": 0
+    },
+    {
+      "id": 6,
+      "categoryId": 2,
+      "name": "Grandma's Boysenberry Spread",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 25,
+      "unitsInStock": 120
+    },
+    {
+      "id": 7,
+      "categoryId": 7,
+      "name": "Uncle Bob's Organic Dried Pears",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 30,
+      "unitsInStock": 15
+    },
+    {
+      "id": 8,
+      "categoryId": 2,
+      "name": "Northwoods Cranberry Sauce",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 40,
+      "unitsInStock": 100
+    },
+    {
+      "id": 9,
+      "categoryId": 6,
+      "name": "Mishi Kobe Niku",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 97,
+      "unitsInStock": 29
+    },
+    {
+      "id": 10,
+      "categoryId": 8,
+      "name": "Ikura",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 31,
+      "unitsInStock": 31
+    },
+    {
+      "id": 11,
+      "categoryId": 4,
+      "name": "Queso Cabrales",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 21,
+      "unitsInStock": 22
+    },
+    {
+      "id": 12,
+      "categoryId": 4,
+      "name": "Queso Manchego La Pastora",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 38,
+      "unitsInStock": 86
+    },
+    {
+      "id": 13,
+      "categoryId": 8,
+      "name": "Konbu",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 6,
+      "unitsInStock": 24
+    },
+    {
+      "id": 14,
+      "categoryId": 7,
+      "name": "Tofu",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 23.25,
+      "unitsInStock": 35
+    },
+    {
+      "id": 15,
+      "categoryId": 2,
+      "name": "Genen Shouyu",
+      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
+      "unitPrice": 15.5,
+      "unitsInStock": 39
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "categoryName": "Beverages",
+      "seoUrl": "beverages"
+    },
+    {
+      "id": 2,
+      "categoryName": "Condiments",
+      "seoUrl": "condiments"
+    },
+    {
+      "id": 3,
+      "categoryName": "Confections",
+      "seoUrl": "confections"
+    },
+    {
+      "id": 4,
+      "categoryName": "Dairy Products",
+      "seoUrl": "dairy-products"
+    },
+    {
+      "id": 5,
+      "categoryName": "Grains/Cereals",
+      "seoUrl": "grains-cereals"
+    },
+    {
+      "id": 6,
+      "categoryName": "Meat/Poultry",
+      "seoUrl": "meat-poultry"
+    },
+    {
+      "id": 7,
+      "categoryName": "Produce",
+      "seoUrl": "produce"
+    },
+    {
+      "id": 8,
+      "categoryName": "Seafood",
+      "seoUrl": "seafood"
+    }
+  ]
+}

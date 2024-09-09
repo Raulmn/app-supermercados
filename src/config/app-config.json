@@ -1,0 +1,10 @@
+{
+    "appName": "MarketAPP",
+    "version": "0.1",
+    "menu": [
+        { "label": "Dashboard", "url": "./dashboard" },
+        { "label": "TPV", "url": "./tpv" },
+        { "label": "Productos", "url": "./productos" }
+    ]
+
+}
