@@ -1,44 +1,54 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { Category } from '@products';
+import { Category, ProductsService } from '@products';
 
 @Component({
   selector: 'app-products-form',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   templateUrl: './products-form.component.html',
   styleUrl: './products-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsFormComponent {
+export class ProductsFormComponent implements OnInit {
 
+  private productsService = inject(ProductsService);
 
-  public productsForm = new FormBuilder().group({
-    id:        new FormControl<string>('', { nonNullable: true }),
-    categoryId:        new FormControl<Category[]>([], { nonNullable: true }),
-    name: new FormControl<string>('', { nonNullable: true }),
-    description: new FormControl<string>(''),
-    unitPrice: new FormControl<number>(0),
+  public categories = computed(() => this.productsService.categoriesList());
+
+  public productForm = new FormBuilder().group({
+    id:           new FormControl<string>('', { nonNullable: true }),
+    categoryId:   new FormControl<number>(0),
+    name:         new FormControl<string>('', { nonNullable: true }),
+    description:  new FormControl<string>(''),
+    unitPrice:    new FormControl<number>(0),
     unitsInStock: new FormControl<number>(0),
   });
 
   constructor() {
-
+    this.productsService.getCategories();
+  }
+  
+  ngOnInit(): void {
   }
 
   // TODO: Tareas
-  // Asignar formControlName del nuevo formulario
-  // Traer Las categorías y añadirlas al formulario
+  // Precargar datos del producto
+  // Editar y devolver guardado
 
+  onSubmit() {
 
+  }
 
 }

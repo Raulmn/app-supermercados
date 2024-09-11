@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Category, Product, ProductsData } from '../interfaces/products.interfaces';
+import { catchError, Observable, of, take } from 'rxjs';
+
 import { environments } from '../../../environment/environments';
+import { Category, Product } from '@products';
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +19,26 @@ export class ProductsService {
   public productsList = computed( () => this.#productsData());
   public categoriesList = computed( () => this.#categoriesData());
 
-  constructor() {
-    this.http.get<Product[]>(`${this.baseUrl}/products`)
-    .subscribe( response => {
-      console.log('Products data: ', response);
-      this.#productsData.set(response)
-    });
-    // this.http.get<Category[]>(`${this.baseUrl}/categories`)
-    // .subscribe( response => {
-    //   console.log('Category data: ', response);
-    //   this.#categoriesData.set(response)
-    // });
-  }
+  constructor() { }
 
   /** Product Methods */
-  getProductById(productId: number) {
+  getProducts():void {
+    this.http.get<Product[]>(`${this.baseUrl}/products`)
+      .pipe(
+        take(1)
+      )
+      .subscribe( response => {
+        console.log('Products data: ', response);
+        this.#productsData.set(response)
+      });
+  }
 
+  getProductById(productId: number):Observable<Product | undefined> {
+    return this.http.get<Product | undefined>(`${this.baseUrl}/products/${productId}`)
+      .pipe(
+        catchError( error => of(undefined) ),
+        take(1)
+      )
   }
 
   createNewProduct() {
@@ -51,6 +57,17 @@ export class ProductsService {
 
 
   /** Categories Methods */
+  getCategories() {
+    this.http.get<Category[]>(`${this.baseUrl}/categories`)
+    .pipe(
+        take(1),
+      )
+    .subscribe( response => {
+      console.log('Category data: ', response);
+      this.#categoriesData.set(response)
+    });
+  }
+  
   getCategoryById(categoryId: number) {
 
   }

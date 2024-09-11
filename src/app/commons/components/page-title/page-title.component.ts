@@ -26,7 +26,6 @@ export class PageTitleComponent implements OnInit {
     )
     .subscribe((value) => {
       this.titlePage = this.title.getTitle().split('|')[0];
-        console.log('Title: ', this.titlePage);
         this.cf.detectChanges();
     })
   }

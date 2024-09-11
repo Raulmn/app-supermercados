@@ -31,7 +31,9 @@ export class ProductsListComponent {
   public productsService = inject( ProductsService );
   public dialogService = inject( DialogService );
 
-  constructor() { }
+  constructor() {
+    this.productsService.getProducts();
+  }
 
   accionDelete(product: Product) {
     this.dialogService.openDialog({
