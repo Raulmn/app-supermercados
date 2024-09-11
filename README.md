@@ -13,5 +13,14 @@ Angular -> v18.2.3
 3. Ejecutar el backend `npm run backend`. Navegar a `http://localhost:3000/products` para comprobar que hay datos y está funcionando correctamente
 4. Ejecutar `ng serve` para inicializar la APP. Navegar a `http://localhost:4200/`  
 
+## Versioning
+
+Semantic versioning relese types (patch, major, or minor): https://docs.npmjs.com/about-semantic-versioning
+
+
+
+
+
+
 ## Creditos
 Raúl Muñoz Navarro -> raul.munoznavarro@plexus.es

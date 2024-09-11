@@ -1,6 +1,7 @@
 <mat-toolbar>
-    <!-- <span> {{ config.appName }} </span> -->
-    <span> App Name </span>
+    
+    <span> {{ appName }} <b class="fs-6">{{ 'v' + appVersion }}</b> </span>
+        
     <span class="spacer"></span>
     
     @for (item of menuItems; track $index) {

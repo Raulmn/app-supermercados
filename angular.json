@@ -6,7 +6,7 @@
     "app-supermercados": {
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "es-ES"
+        "sourceLocale": "es"
       },
       "schematics": {
         "@schematics/angular:component": {

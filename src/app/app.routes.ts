@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: 'dashboard',
+        title: 'Dashboard',
         loadComponent: () => import('./pages/dashboard/dashboard.component'),
 
     },
@@ -12,14 +13,17 @@ export const routes: Routes = [
         children: [
             {   
                 path: '',
+                title: 'Productos',
                 loadComponent: () => import('./pages/products/list-products/list-products.component')
             },
             {
                 path: 'create',
+                title: 'Crear Producto',
                 loadComponent: () => import('./pages/products/create-product/create-product.component')
             },
             {
                 path: 'edit/:id',
+                title: 'Editar Producto',
                 loadComponent: () => import('./pages/products/edit-product/edit-product.component')
             },
             {   
@@ -31,6 +35,7 @@ export const routes: Routes = [
     },
     {
         path: 'tpv',
+        title: 'Terminal Punto de Venta',
         loadComponent: () => import('./pages/tpv/tpv.component'),
 
     },

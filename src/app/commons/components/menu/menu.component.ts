@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { displayName, version } from '../../../../../package.json';
+
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +22,8 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class MenuComponent {
 
+  public appName: string = displayName;
+  public appVersion: string = version;
 
   public menuItems = [
     { label: 'Dashboard', url: './dashboard' },
