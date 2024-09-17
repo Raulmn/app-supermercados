@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, output, OutputEmitterRef } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { Category, ProductsService } from '@products';
+import { Category, Product, ProductsService } from '@products';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-products-form',
@@ -15,25 +16,26 @@ import { Category, ProductsService } from '@products';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   templateUrl: './products-form.component.html',
-  styleUrl: './products-form.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsFormComponent implements OnInit {
 
   private productsService = inject(ProductsService);
-
+  
+  public submitForm = output<Product>();
   public categories = computed(() => this.productsService.categoriesList());
 
   public productForm = new FormBuilder().group({
-    id:           new FormControl<string>('', { nonNullable: true }),
-    categoryId:   new FormControl<number>(0),
-    name:         new FormControl<string>('', { nonNullable: true }),
+    id:           new FormControl<string>(''),
+    categoryId:   new FormControl<string>('', [Validators.required]),
+    name:         new FormControl<string>('', [Validators.required]),
     description:  new FormControl<string>(''),
-    unitPrice:    new FormControl<number>(0),
-    unitsInStock: new FormControl<number>(0),
+    unitPrice:    new FormControl<number>(0, [Validators.required]),
+    unitsInStock: new FormControl<number>(0, [Validators.required]),
   });
 
   constructor() {
@@ -44,11 +46,14 @@ export class ProductsFormComponent implements OnInit {
   }
 
   // TODO: Tareas
-  // Precargar datos del producto
   // Editar y devolver guardado
 
   onSubmit() {
-
+    console.log('Form', this.productForm)
+    if(this.productForm.invalid) return;
+    
+    console.log('Form Value', this.productForm.value)
+    this.submitForm.emit(this.productForm.value as Product);
   }
 
 }

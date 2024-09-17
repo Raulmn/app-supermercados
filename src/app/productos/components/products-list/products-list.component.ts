@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 
 
 import { Product, ProductsService } from '@products';
-import { DialogService } from '@commons';
+import { DialogService, FilterPipe, SearchService } from '@commons';
 
 @Component({
   selector: 'app-products-list',
@@ -18,31 +18,43 @@ import { DialogService } from '@commons';
     MatCardModule,
     MatButtonModule,
     MatChipsModule,
+    FilterPipe
   ],
   providers: [
-    DialogService
+    DialogService,
   ],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductsListComponent {
+export class ProductsListComponent implements OnInit{
 
+  private dialogService = inject( DialogService );
+  private searchService = inject( SearchService);
   public productsService = inject( ProductsService );
-  public dialogService = inject( DialogService );
+  
+  public searchValue = computed( () => {
+    console.log('computed', this.searchService.searchValue())
+    return this.searchService.searchValue();
+  });
+
 
   constructor() {
     this.productsService.getProducts();
+  }
+
+
+  ngOnInit(): void {
   }
 
   accionDelete(product: Product) {
     this.dialogService.openDialog({
       title: 'Eliminar producto',
       type: 'bg-danger',
-      description: `Desea eliminar ${product.name}`
+      description: `Desea eliminar el producto "${product.name}"`
     }).afterClosed().subscribe((res) => {
       if (res) {
-        this.productsService.deleteProductById(product.id)
+        this.productsService.deleteProductById(product.id).subscribe();
       }
     });
 

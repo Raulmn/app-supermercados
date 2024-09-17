@@ -4,14 +4,14 @@ export interface ProductsData {
 }
 
 export interface Category {
-    id:           number;
-    name: string;
+    id:           string;
+    name:         string;
     seoUrl:       string;
 }
 
 export interface Product {
-    id:              number;
-    categoryId:      number;
+    id:              string;
+    categoryId:      string;
     name:            string;
     description:     string;
     unitPrice:       number;

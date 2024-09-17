@@ -11,7 +11,12 @@ export * from './components/page-title/page-title.component';
 
 // Search Component
 export * from './components/search/search.component';
+export * from './components/search/search.service';
 
 // Services
 export * from './services/http/http.interceptor';
 export * from './services/core/page-title-strategy.service';
+export * from './services/core/snackbar-notification.service';
+
+// Pipes
+export * from './pipes/filter.pipe'

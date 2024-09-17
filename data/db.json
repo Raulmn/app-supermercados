@@ -2,10 +2,10 @@
   "products": [
     {
       "id": "1",
-      "categoryId": "2",
-      "name": "Chai",
+      "categoryId": "1",
+      "name": "Té Chai",
       "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
-      "unitPrice": "24",
+      "unitPrice": 30,
       "unitsInStock": 53
     },
     {
@@ -47,14 +47,6 @@
       "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
       "unitPrice": 30,
       "unitsInStock": 15
-    },
-    {
-      "id": "8",
-      "categoryId": "2",
-      "name": "Northwoods Cranberry Sauce",
-      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
-      "unitPrice": 40,
-      "unitsInStock": 100
     },
     {
       "id": "9",
@@ -106,11 +98,11 @@
     },
     {
       "id": "15",
-      "categoryId": "2",
-      "name": "Genen Shouyu",
-      "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
-      "unitPrice": 15.5,
-      "unitsInStock": 39
+      "categoryId": "3",
+      "name": "iPhone 16 Pro",
+      "description": "Otro nuevo clon con 2 botones mas 🤣",
+      "unitPrice": 1500,
+      "unitsInStock": 21
     }
   ],
   "categories": [

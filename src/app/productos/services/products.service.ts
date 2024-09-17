@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { catchError, Observable, of, take } from 'rxjs';
+import { Observable, of, take, tap } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { environments } from '../../../environment/environments';
 import { Category, Product } from '@products';
+import { SnackbarNotificationService } from '@commons';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ import { Category, Product } from '@products';
 export class ProductsService {
 
   private baseUrl: string = environments.baseUrl;
-  private http = inject( HttpClient );
+  private _http = inject( HttpClient );
+  private _notificationService = inject(SnackbarNotificationService);
 
   #productsData = signal<Product[]>([]);
   #categoriesData = signal<Category[]>([]);
@@ -23,52 +26,69 @@ export class ProductsService {
 
   /** Product Methods */
   getProducts():void {
-    this.http.get<Product[]>(`${this.baseUrl}/products`)
+    this._http.get<Product[]>(`${this.baseUrl}/products`)
       .pipe(
         take(1)
       )
-      .subscribe( response => {
-        console.log('Products data: ', response);
-        this.#productsData.set(response)
-      });
+      .subscribe( response => this.#productsData.set(response));
   }
 
-  getProductById(productId: number):Observable<Product | undefined> {
-    return this.http.get<Product | undefined>(`${this.baseUrl}/products/${productId}`)
+  getProductById(productId: string): Observable<Product | undefined> {
+    if ( !productId ) throw Error('El "id" del producto es obligatoria');
+    
+    return this._http.get<Product>(`${this.baseUrl}/products/${productId}`)
       .pipe(
-        catchError( error => of(undefined) ),
         take(1)
-      )
+      );
   }
 
-  createNewProduct() {
+  createNewProduct(product: Product) {
+    if ( !product ) throw Error('Es necasaria la información del producto');
 
+    return this._http.post<Product>(`${this.baseUrl}/products`, product)
+      .pipe(
+        take(1),
+        tap({ complete: () => this._notificationService.showNotification(`${ product.name }, se ha creado correctamente`) })
+      );
   }
   
+  updateProducts(product: Product) {
+    if ( !product.id ) throw Error('El "id" del producto es obligatoria');
 
-  updateProducts(productId: number) {
+    return this._http.patch<Product>(`${this.baseUrl}/products/${product.id}`, product)
+    .pipe(
+        take(1),
+        tap({ complete: () => this._notificationService.showNotification(`${ product.name }, se ha actualizado correctamente`) })
+      );
 
   }
 
-  deleteProductById(productId: number) {
+  deleteProductById(productId: string) {
+    if ( !productId ) throw Error('El "id" del producto es obligatoria');
 
+    return this._http.delete<Product>(`${this.baseUrl}/products/${productId}`)
+    .pipe(
+        take(1),
+        tap({ complete: () => {
+            this._notificationService.showNotification('El producto se ha eliminado correctamente');
+            this.getProducts();
+          }
+        })
+      );
   }
 
 
 
   /** Categories Methods */
   getCategories() {
-    this.http.get<Category[]>(`${this.baseUrl}/categories`)
+    this._http.get<Category[]>(`${this.baseUrl}/categories`)
     .pipe(
         take(1),
       )
-    .subscribe( response => {
-      console.log('Category data: ', response);
-      this.#categoriesData.set(response)
-    });
+    .subscribe( response => this.#categoriesData.set(response));
   }
   
-  getCategoryById(categoryId: number) {
+  getCategoryById(categoryId: string) {
 
   }
 
@@ -76,11 +96,11 @@ export class ProductsService {
 
   }
 
-  updateCategory(categoryId: number) {
+  updateCategory(categoryId: string) {
 
   }
 
-  deleteCategoryById(categoryId: number) {
+  deleteCategoryById(categoryId: string) {
 
   }
 

@@ -16,8 +16,7 @@ import { displayName, version } from '../../../../../package.json';
     MatToolbarModule,
     MatMenuModule,
   ],
-  templateUrl: './menu.component.html', 
-  styleUrl: './menu.component.css',
+  templateUrl: './menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {

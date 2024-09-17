@@ -1,5 +1,5 @@
 <ul class="row p-0">
-    @for (product of productsService.productsList(); track product.id) {
+    @for (product of (productsService.productsList() | filter:searchValue()); track product.id) {
         <div class="col-lg-4 col-md-6 col-xs-12 p-2">
             <mat-card appearance="outlined">
                 <mat-card-header>
@@ -21,11 +21,11 @@
                     
                     <mat-chip-set>
                         @if(product.unitsInStock > 20) {
-                        <mat-chip class="bg-success">{{ product.unitsInStock }} en stock</mat-chip>
+                            <mat-chip class="bg-success">{{ product.unitsInStock }} en stock</mat-chip>
                         } @else if (product.unitsInStock < 20 && product.unitsInStock> 0) {
-                            <mat-chip class="bg-warn">{{ product.unitsInStock }} en stock</mat-chip>
+                                <mat-chip class="bg-warn">{{ product.unitsInStock }} en stock</mat-chip>
                             } @else {
-                            <mat-chip class="bg-danger">Fuera de Stock</mat-chip>
+                                <mat-chip class="bg-danger">Fuera de Stock</mat-chip>
                             }
                     </mat-chip-set>
                     
@@ -39,7 +39,7 @@
                 </mat-card-content>
                 <mat-card-actions align="end">
                     
-                    <button class="m-2" [routerLink]="['/productos/edit', product.id]" mat-flat-button >Editar</button>
+                    <button class="m-2" [routerLink]="['/productos/editar', product.id]" mat-flat-button >Editar</button>
                     <button class="m-2 bg-danger" mat-flat-button (click)="accionDelete(product)">Borrar</button>
 
                 </mat-card-actions>

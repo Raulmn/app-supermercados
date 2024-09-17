@@ -1,1 +1,8 @@
-<p>search works!</p>,
+<div class="row">
+    <form [formGroup]="searchForm">
+        <mat-form-field class="col-12">
+            <input type="text" matInput placeholder="Buscar productos..." formControlName="searchValue">
+            <mat-icon matSuffix fontIcon="search"></mat-icon>
+        </mat-form-field>
+    </form>
+</div>

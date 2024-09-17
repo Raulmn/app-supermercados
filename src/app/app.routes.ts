@@ -17,12 +17,12 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/products/list-products/list-products.component')
             },
             {
-                path: 'create',
+                path: 'nuevo',
                 title: 'Crear Producto',
                 loadComponent: () => import('./pages/products/create-product/create-product.component')
             },
             {
-                path: 'edit/:id',
+                path: 'editar/:id',
                 title: 'Editar Producto',
                 loadComponent: () => import('./pages/products/edit-product/edit-product.component')
             },
@@ -41,6 +41,7 @@ export const routes: Routes = [
     },
     {
         path: '404',
+        title: '404 Page Not Found',
         loadComponent: () => import('./pages/404/404.component'),
 
     },

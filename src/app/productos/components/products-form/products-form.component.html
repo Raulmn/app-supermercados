@@ -1,34 +1,56 @@
-<form class="grid" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form class="grid" [formGroup]="productForm">
 
-    <mat-form-field class="col-md-6 col-md-6 col-xs-12 p-1">
-        <mat-label>Nombre</mat-label>
-        <input matInput type="text" required formControlName="name" />
-    </mat-form-field>
-
-    <mat-form-field class="col-md-6 col-md-6 col-xs-12">
-        <mat-label>Categoría</mat-label>
-        <mat-select formControlName="categoryId" required>
-            @for (category of categories(); track category.id) {
-                <mat-option [value]="category.id">
-                    {{ category.name }}
-                </mat-option>
+    <div class="row">
+        <mat-form-field class="col-md-6 col-xs-12">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" required formControlName="name" />
+            @if (productForm.get('name')?.hasError('required')) {
+                <mat-error>El nombre es <strong>obligatorio</strong></mat-error>
             }
-        </mat-select>
-    </mat-form-field>
+        </mat-form-field>
+    
+        <mat-form-field class="col-md-6 col-xs-12">
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="categoryId" required>
+                @for (category of categories(); track category.id) {
+                    <mat-option [value]="category.id">
+                        {{ category.name }}
+                    </mat-option>
+                }
+            </mat-select>
+            @if (productForm.get('categoryId')?.hasError('required')) {
+                <mat-error>La categoría es <strong>obligatoria</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
 
-    <mat-form-field class="col-12">
-        <mat-label>Descripción</mat-label>
-        <input matInput type="text" required formControlName="description" />
-    </mat-form-field>
+    <div class="row">
+        <mat-form-field class="col-12">
+            <mat-label>Descripción</mat-label>
+            <input matInput type="text" formControlName="description" />
+        </mat-form-field>
+    </div>
 
-    <mat-form-field class="col-md-6 col-md-6 col-xs-12 p-1">
-        <mat-label>Precio (unidad)</mat-label>
-        <input matInput type="number" required formControlName="unitPrice" />
-    </mat-form-field>
-
-    <mat-form-field class="col-md-6 col-md-6 col-xs-12 p-1">
-        <mat-label>Stock</mat-label>
-        <input matInput type="number" required formControlName="unitsInStock" />
-    </mat-form-field>
+    <div class="row">
+        <mat-form-field class="col-md-6 col-xs-12">
+            <mat-label>Precio (unidad)</mat-label>
+            <input matInput type="number" required formControlName="unitPrice" />
+            @if (productForm.get('unitPrice')?.hasError('required')) {
+                <mat-error>El precio por unidad es <strong>obligatorio</strong></mat-error>
+            }
+        </mat-form-field>
+    
+        <mat-form-field class="col-md-6 col-xs-12">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" required formControlName="unitsInStock" />
+            @if (productForm.get('unitsInStock')?.hasError('required')) {
+                <mat-error>El stock es <strong>obligatorio</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+    
+    <div align="end">
+        <button class="m-2" (click)="onSubmit()" mat-flat-button>Guardar</button>
+    </div>
 
 </form>

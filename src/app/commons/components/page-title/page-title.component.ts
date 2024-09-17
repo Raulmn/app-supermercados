@@ -14,7 +14,7 @@ export class PageTitleComponent implements OnInit {
 
   private router = inject(Router);
   
-  public titlePage: string = 'ddd';
+  public titlePage: string = '';
 
   constructor(private title: Title, private cf: ChangeDetectorRef) { }
 

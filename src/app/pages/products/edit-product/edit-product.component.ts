@@ -1,22 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormGroup, FormsModule } from '@angular/forms';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductsFormComponent, ProductsService } from '@products';
 import { switchMap } from 'rxjs';
+
+import { Product, ProductsFormComponent, ProductsService } from '@products';
 
 @Component({
   selector: 'app-edit-product',
   standalone: true,
   imports: [
-    CommonModule,
     ProductsFormComponent
   ],
   templateUrl: './edit-product.component.html',
-  styleUrl: './edit-product.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class EditProductComponent implements OnInit, AfterViewInit {
+export default class EditProductComponent implements AfterViewInit {
   
 
   private router = inject(Router);
@@ -26,29 +24,27 @@ export default class EditProductComponent implements OnInit, AfterViewInit {
   @ViewChild(ProductsFormComponent) productFormChildComponent!: ProductsFormComponent;
   
   
-  ngOnInit(): void {
-
-    
-  }
-  
   ngAfterViewInit(): void {
+    
     if ( !this.router.url.includes('edit') ) return;
+    
     const productFormChild = this.productFormChildComponent.productForm as FormGroup
   
     this.activatedRoute.params
       .pipe(
         switchMap( ({ id }) => this.productsService.getProductById( id ) ),
       ).subscribe( product => {
-        console.log('Producto: ', product);
-        if ( !product ) {
-          return this.router.navigateByUrl('/');
-        }
+        if ( !product ) this.router.navigateByUrl('/productos');
    
   
-        productFormChild.patchValue(product);
-        // this.heroForm.reset( hero );
+        productFormChild.reset(product);
         return;
       });
+  }
+
+  accionSubmitForm(productUpdate: Product) {
+    this.productsService.updateProducts(productUpdate)
+      .subscribe(() => this.router.navigateByUrl('/productos'));
   }
 
 
