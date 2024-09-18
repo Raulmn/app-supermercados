@@ -20,8 +20,8 @@ import { delay, Observable, tap } from 'rxjs';
 })
 export class LoaderSpinnerComponent implements OnInit {
   
-  private _loadingService = inject(LoadingService)
-  private _router = inject(Router)
+  private _loadingService = inject(LoadingService);
+  private _router = inject(Router);
   
   public mode: ProgressSpinnerMode = 'indeterminate';
   public loading$: Observable<boolean>;

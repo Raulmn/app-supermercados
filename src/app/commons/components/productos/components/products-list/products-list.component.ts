@@ -24,7 +24,6 @@ import { DialogService, FilterPipe, SearchService } from '@commons';
     DialogService,
   ],
   templateUrl: './products-list.component.html',
-  styleUrl: './products-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit{

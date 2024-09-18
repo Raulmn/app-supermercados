@@ -12,7 +12,6 @@ import { DialogData } from '@commons';
     MatButtonModule
   ],
   templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent {

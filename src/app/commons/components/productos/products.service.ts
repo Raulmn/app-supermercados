@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { delay, map, Observable, of, take, tap } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 
-import { environments } from '../../../environment/environments';
+import { environments } from '../../../../environment/environments';
 import { Category, Product } from '@products';
 import { SnackbarNotificationService } from '@commons';
 

@@ -19,7 +19,6 @@ import { ProductsListComponent } from '@products';
     RouterModule
   ],
   templateUrl: './list-products.component.html',
-  styleUrl: './list-products.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ListProductsComponent { }

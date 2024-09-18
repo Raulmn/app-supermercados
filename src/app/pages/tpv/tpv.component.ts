@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     CommonModule,
   ],
   template: `<p>tpv works!</p>`,
-  styleUrl: './tpv.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TpvComponent { }
