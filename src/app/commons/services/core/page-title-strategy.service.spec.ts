@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { PageTitleStrategyService } from './page-title-strategy.service';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot } from '@angular/router';
-import { displayName } from '../../../../../package.json';
+import packageJson from './../../../../../package.json';
 
 describe('PageTitleStrategyService', () => {
   let service: PageTitleStrategyService;
@@ -37,17 +37,13 @@ describe('PageTitleStrategyService', () => {
 
     service.updateTitle(mockRouterStateSnapshot);
 
-    expect(titleServiceMock.setTitle).toHaveBeenCalledWith('Página de prueba | ' + displayName);
+    expect(titleServiceMock.setTitle).toHaveBeenCalledWith('Página de prueba | ' + packageJson.displayName);
   });
 
   it('no debe actualizar el título si el título es indefinido', () => {
-    const mockRouterStateSnapshot = {
-      root: {
-        firstChild: {
-          data: {}
-        }
-      }
-    } as unknown as RouterStateSnapshot;
+    const mockRouterStateSnapshot = {} as RouterStateSnapshot;
+
+    spyOn(service, 'buildTitle').and.returnValue(undefined);
 
     service.updateTitle(mockRouterStateSnapshot);
 

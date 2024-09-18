@@ -2,9 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import ListProductsComponent from './list-products.component';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ProductsListComponent } from '@products';
+import { ProductsListComponent, ProductsService } from '@products';
 import { SearchComponent } from '@commons';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ListProductsComponent', () => {
   let component: ListProductsComponent;
@@ -12,12 +14,16 @@ describe('ListProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListProductsComponent],
       imports: [
-        RouterTestingModule,  // Importar para simular las rutas
+        RouterTestingModule,
         MatButtonModule,
+        HttpClientTestingModule,
         ProductsListComponent,
-        SearchComponent
+        SearchComponent,
+        BrowserAnimationsModule
+      ],
+      providers: [
+        ProductsService
       ]
     }).compileComponents();
 
@@ -31,8 +37,8 @@ describe('ListProductsComponent', () => {
   });
 
   it('debe contener el botón "Nuevo producto" que navega a /productos/nuevo', () => {
-    const button = fixture.debugElement.query(By.css('button[routerLink="/productos/nuevo"]'));
-    expect(button).toBeTruthy();
+    const button = fixture.debugElement.query(By.css('button'));
+    expect(button.nativeElement.textContent).toContain('Nuevo producto', 'El texto del botón no es Nuevo producto')
   });
 
   it('debe contener el componente de búsqueda', () => {

@@ -4,6 +4,7 @@ import { Category, ProductsService } from '@products';
 import { GenerateIdService } from '@commons';
 import { ReactiveFormsModule } from '@angular/forms';
 import { signal } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProductsFormComponent', () => {
   let component: ProductsFormComponent;
@@ -24,8 +25,10 @@ describe('ProductsFormComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [ProductsFormComponent],
+      imports: [
+        ReactiveFormsModule,
+        BrowserAnimationsModule
+      ],
       providers: [
         { provide: ProductsService, useValue: productsServiceMock },
         { provide: GenerateIdService, useValue: generateIdServiceMock }

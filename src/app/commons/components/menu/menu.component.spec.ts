@@ -16,7 +16,6 @@ describe('MenuComponent', () => {
         MatToolbarModule,
         MatMenuModule,
       ],
-      declarations: [MenuComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MenuComponent);

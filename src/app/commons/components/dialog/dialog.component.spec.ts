@@ -8,9 +8,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 describe('DialogComponent', () => {
   let component: DialogComponent;
   let fixture: ComponentFixture<DialogComponent>;
-  let dialogRefSpy: jasmine.SpyObj<MatDialogRef<DialogComponent>>;
-  let closeBtn: DebugElement;
-  let deleteBtn: DebugElement;
+  let dialogRefMock: jasmine.SpyObj<MatDialogRef<DialogComponent>>;
 
   const mockData = {
     title: 'Confirmar eliminación',
@@ -19,24 +17,19 @@ describe('DialogComponent', () => {
   };
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('MatDialogRef', ['close']);
+    dialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
       imports: [MatDialogModule, NoopAnimationsModule],
-      declarations: [DialogComponent],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: mockData },
-        { provide: MatDialogRef, useValue: spy }
+        { provide: MatDialogRef, useValue: dialogRefMock }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DialogComponent);
     component = fixture.componentInstance;
-    dialogRefSpy = TestBed.inject(MatDialogRef) as jasmine.SpyObj<MatDialogRef<DialogComponent>>;
     fixture.detectChanges();
-
-    closeBtn = fixture.debugElement.query(By.css('button[mat-dialog-close]'));
-    deleteBtn = fixture.debugElement.query(By.css('button.bg-danger'));
   });
 
   it('debe crear el componente correctamente', () => {
@@ -52,12 +45,18 @@ describe('DialogComponent', () => {
   });
 
   it('debe cerrar el diálogo cuando se presiona el botón "Cerrar"', () => {
-    closeBtn.triggerEventHandler('click', null);
-    expect(dialogRefSpy.close).toHaveBeenCalledWith();
+    const closeBtn: DebugElement = fixture.debugElement.query(By.css('button[mat-dialog-close]'));
+    expect(closeBtn).toBeTruthy();
+    
+    closeBtn.nativeElement.click();
+    expect(dialogRefMock.close).toHaveBeenCalledWith('');
   });
-
+  
   it('debe cerrar el diálogo con valor "true" al presionar el botón "Eliminar"', () => {
-    deleteBtn.triggerEventHandler('click', null);
-    expect(dialogRefSpy.close).toHaveBeenCalledWith(true);
+    const deleteBtn: DebugElement = fixture.debugElement.query(By.css('button.bg-danger'));
+    expect(deleteBtn).toBeTruthy();
+    
+    deleteBtn.nativeElement.click();
+    expect(dialogRefMock.close).toHaveBeenCalledWith(true);
   });
 });

@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { SearchService } from '@commons';
 import { signal } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -23,9 +24,9 @@ describe('SearchComponent', () => {
       imports: [
         ReactiveFormsModule,
         MatInputModule,
-        MatIconModule
+        MatIconModule,
+        BrowserAnimationsModule
       ],
-      declarations: [SearchComponent],
       providers: [
         { provide: SearchService, useValue: searchServiceMock }
       ]

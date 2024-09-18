@@ -7,9 +7,7 @@ describe('TpvComponent', () => {
   let fixture: ComponentFixture<TpvComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [TpvComponent]
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(TpvComponent);
     component = fixture.componentInstance;

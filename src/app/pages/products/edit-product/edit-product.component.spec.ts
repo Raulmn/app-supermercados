@@ -2,17 +2,34 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import EditProductComponent from './edit-product.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
-import { ProductsService, Product, ProductsFormComponent } from '@products';
+import { ProductsService, Product, ProductsFormComponent, Category } from '@products';
+import { signal } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('EditProductComponent', () => {
   let component: EditProductComponent;
   let fixture: ComponentFixture<EditProductComponent>;
-  let productsServiceMock: jasmine.SpyObj<ProductsService>;
+  let productsServiceMock: Partial<ProductsService>;
   let routerMock: jasmine.SpyObj<Router>;
   let activatedRouteMock: any;
 
-  let product: Product = {
+  const categories: Category[] = [
+    {id: '1', name: 'Categoría 1', seoUrl: 'seo-url'},
+    {id: '2', name: 'Categoría 2', seoUrl: 'seo-url-2'},
+    {id: '3', name: 'Categoría 3', seoUrl: 'seo-url-3'}
+  ]
+  
+  const product: Product = {
+    id: '1',
+    name: 'Producto test',
+    categoryId: 'cat1',
+    description: 'Descripción test',
+    unitPrice: 150,
+    unitsInStock: 30
+  };
+
+  const productActualizado: Product = {
     id: '1',
     name: 'Producto Actualizado',
     categoryId: 'cat1',
@@ -22,16 +39,25 @@ describe('EditProductComponent', () => {
   };
 
   beforeEach(async () => {
-    const productsServiceSpy = jasmine.createSpyObj('ProductsService', ['getProductById', 'updateProducts']);
     const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     activatedRouteMock = {
       params: of({ id: '1' })
     };
 
+    productsServiceMock = {
+      getCategories: jasmine.createSpy('getCategories').and.callFake(() => categories),
+      updateProducts: jasmine.createSpy('updateProducts').and.returnValue(of(productActualizado)),
+      getProductById: jasmine.createSpy('getProductById').and.returnValue(of(product)),
+      categoriesList: signal(categories)
+    }
+
     await TestBed.configureTestingModule({
-      declarations: [EditProductComponent, ProductsFormComponent],
+      imports: [
+        ProductsFormComponent,
+        BrowserAnimationsModule
+      ],
       providers: [
-        { provide: ProductsService, useValue: productsServiceSpy },
+        { provide: ProductsService, useValue: productsServiceMock },
         { provide: Router, useValue: routerSpy },
         { provide: ActivatedRoute, useValue: activatedRouteMock }
       ]
@@ -39,8 +65,7 @@ describe('EditProductComponent', () => {
 
     fixture = TestBed.createComponent(EditProductComponent);
     component = fixture.componentInstance;
-    productsServiceMock = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
-    routerMock = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    routerMock = jasmine.createSpyObj('Router', ['navigateByUrl'], { url: '/productos/edit/1'});
   });
 
   it('debe crear el componente correctamente', () => {
@@ -48,32 +73,21 @@ describe('EditProductComponent', () => {
   });
 
   it('debe cargar el producto en el formulario si la URL contiene "edit"', fakeAsync(() => {
-    const product: Product = {
-      id: '1',
-      name: 'Producto Test',
-      categoryId: 'cat1',
-      description: 'Descripción',
-      unitPrice: 100,
-      unitsInStock: 50
-    };
-
-    productsServiceMock.getProductById.and.returnValue(of(product));
-
-    fixture.detectChanges();
     tick();
+    fixture.detectChanges();
 
     expect(productsServiceMock.getProductById).toHaveBeenCalledWith('1');
     const productFormChild = component.productFormChildComponent.productForm;
-    expect(productFormChild.value.name).toBe('Producto Test');
+    expect(productFormChild.value.name).toBe('Producto test');
   }));
 
   it('debe llamar a updateProducts y redirigir al enviar el formulario', () => {
 
-    productsServiceMock.updateProducts.and.returnValue(of(product));
+    (productsServiceMock.updateProducts as jasmine.Spy).and.returnValue(of(productActualizado));
 
-    component.accionSubmitForm(product);
+    component.accionSubmitForm(productActualizado);
 
-    expect(productsServiceMock.updateProducts).toHaveBeenCalledWith(product);
+    expect(productsServiceMock.updateProducts).toHaveBeenCalledWith(productActualizado);
     expect(routerMock.navigateByUrl).toHaveBeenCalledWith('/productos');
   });
 });

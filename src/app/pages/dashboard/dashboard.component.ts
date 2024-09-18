@@ -8,7 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     CommonModule,
   ],
   template: `<p>dashboard works!</p>`,
-  styleUrl: './dashboard.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class DashboardComponent { }

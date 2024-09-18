@@ -21,7 +21,7 @@ describe('PageTitleComponent', () => {
 
     // Mock del servicio Title para obtener el título actual
     titleServiceMock = {
-      getTitle: jasmine.createSpy('getTitle').and.returnValue('Test Page | MyApp'),
+      getTitle: jasmine.createSpy('getTitle').and.returnValue('Test Page'),
     };
 
     changeDetectorRefMock = {
@@ -29,7 +29,6 @@ describe('PageTitleComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [PageTitleComponent],
       providers: [
         { provide: Router, useValue: routerMock },
         { provide: Title, useValue: titleServiceMock },

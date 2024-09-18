@@ -7,9 +7,7 @@ describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [DashboardComponent]
-    }).compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;

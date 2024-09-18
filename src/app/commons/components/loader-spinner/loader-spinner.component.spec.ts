@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router, Event, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { LoaderSpinnerComponent } from './loader-spinner.component';
 import { LoadingService } from '@commons';
-import { of, Subject } from 'rxjs';
+import { BehaviorSubject, of, Subject } from 'rxjs';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -13,12 +13,14 @@ describe('LoaderSpinnerComponent', () => {
   let loadingServiceMock: Partial<LoadingService>;
   let routerMock: Partial<Router>;
   let routerEvents$: Subject<Event>;
+  let loadingSubject: BehaviorSubject<boolean>;
 
   beforeEach(async () => {
     routerEvents$ = new Subject<Event>();
+    loadingSubject = new BehaviorSubject<boolean>(false)
 
     loadingServiceMock = {
-      loading$: of(false), // valor inicial, puede cambiar en los tests
+      loading$: loadingSubject.asObservable(), // valor inicial, puede cambiar en los tests
       loadingOn: jasmine.createSpy('loadingOn'),
       loadingOff: jasmine.createSpy('loadingOff'),
     };
@@ -45,7 +47,7 @@ describe('LoaderSpinnerComponent', () => {
   });
 
   it('debe mostrar el spinner cuando loading$ es true', () => {
-    loadingServiceMock.loading$ = of(true);
+    loadingSubject.next(true);
     fixture.detectChanges();
 
     const spinner = fixture.debugElement.query(By.directive(MatProgressSpinner));
@@ -53,7 +55,7 @@ describe('LoaderSpinnerComponent', () => {
   });
 
   it('no debe mostrar el spinner cuando loading$ es false', () => {
-    loadingServiceMock.loading$ = of(false);
+    loadingSubject.next(false);
     fixture.detectChanges();
 
     const spinner = fixture.debugElement.query(By.directive(MatProgressSpinner));
