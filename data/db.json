@@ -3,7 +3,7 @@
     {
       "id": "1",
       "categoryId": "1",
-      "name": "Té Chai",
+      "name": "Té CHIA",
       "description": "Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.",
       "unitPrice": 30,
       "unitsInStock": 53
@@ -100,9 +100,25 @@
       "id": "15",
       "categoryId": "3",
       "name": "iPhone 16 Pro",
-      "description": "Otro nuevo clon con 2 botones mas 🤣",
+      "description": "Otro nuevo clon con 2 botones mas",
       "unitPrice": 1500,
       "unitsInStock": 21
+    },
+    {
+      "id": "45",
+      "categoryId": "2",
+      "name": "asdasdfa",
+      "description": "adasdf",
+      "unitPrice": 333,
+      "unitsInStock": 2
+    },
+    {
+      "id": "796156",
+      "categoryId": "2",
+      "name": "asdfasdf",
+      "description": "asdfasdf",
+      "unitPrice": 33,
+      "unitsInStock": 1
     }
   ],
   "categories": [

@@ -1,11 +1,11 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter, TitleStrategy } from '@angular/router';
 
 
 import { routes } from './app.routes';
-import { httpInterceptor, PageTitleStrategyService } from '@commons';
+import { httpInterceptor, LoadingInterceptor, PageTitleStrategyService } from '@commons';
 
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +14,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     {provide: TitleStrategy, useClass: PageTitleStrategyService},
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([httpInterceptor])) // HttpClientModule -> Deprecated
+    provideHttpClient(withInterceptors([httpInterceptor])), // HttpClientModule -> Deprecated
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
   ]
 };

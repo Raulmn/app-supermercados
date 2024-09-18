@@ -15,8 +15,11 @@ export * from './components/search/search.service';
 
 // Services
 export * from './services/http/http.interceptor';
+export * from './services/http/loading.interceptor';
 export * from './services/core/page-title-strategy.service';
 export * from './services/core/snackbar-notification.service';
+export * from './services/core/loading.service';
+export * from './services/utils/generate-id.service';
 
 // Pipes
 export * from './pipes/filter.pipe'

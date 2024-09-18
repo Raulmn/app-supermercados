@@ -5,8 +5,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { Category, Product, ProductsService } from '@products';
+import { Product, ProductsService } from '@products';
 import { MatButtonModule } from '@angular/material/button';
+import { GenerateIdService } from '@commons';
 
 @Component({
   selector: 'app-products-form',
@@ -25,12 +26,13 @@ import { MatButtonModule } from '@angular/material/button';
 export class ProductsFormComponent implements OnInit {
 
   private productsService = inject(ProductsService);
+  private generateIdService = inject(GenerateIdService);
   
   public submitForm = output<Product>();
   public categories = computed(() => this.productsService.categoriesList());
 
   public productForm = new FormBuilder().group({
-    id:           new FormControl<string>(''),
+    id:           new FormControl<string>(this.generateIdService.getRandomId(15, 1000000)),
     categoryId:   new FormControl<string>('', [Validators.required]),
     name:         new FormControl<string>('', [Validators.required]),
     description:  new FormControl<string>(''),

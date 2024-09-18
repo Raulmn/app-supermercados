@@ -17,34 +17,33 @@ import { Product, ProductsFormComponent, ProductsService } from '@products';
 export default class EditProductComponent implements AfterViewInit {
   
 
-  private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
-  private productsService = inject(ProductsService);
+  private _router = inject(Router);
+  private _activatedRoute = inject(ActivatedRoute);
+  private _productsService = inject(ProductsService);
 
   @ViewChild(ProductsFormComponent) productFormChildComponent!: ProductsFormComponent;
   
   
   ngAfterViewInit(): void {
     
-    if ( !this.router.url.includes('edit') ) return;
+    if ( !this._router.url.includes('edit') ) return;
     
     const productFormChild = this.productFormChildComponent.productForm as FormGroup
   
-    this.activatedRoute.params
+    this._activatedRoute.params
       .pipe(
-        switchMap( ({ id }) => this.productsService.getProductById( id ) ),
+        switchMap( ({ id }) => this._productsService.getProductById( id ) ),
       ).subscribe( product => {
-        if ( !product ) this.router.navigateByUrl('/productos');
-   
-  
+        if ( !product ) this._router.navigateByUrl('/productos');
+
         productFormChild.reset(product);
         return;
       });
   }
 
   accionSubmitForm(productUpdate: Product) {
-    this.productsService.updateProducts(productUpdate)
-      .subscribe(() => this.router.navigateByUrl('/productos'));
+    this._productsService.updateProducts(productUpdate)
+      .subscribe(() => this._router.navigateByUrl('/productos'));
   }
 
 

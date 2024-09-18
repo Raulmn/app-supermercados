@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Observable, of, take, tap } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { delay, map, Observable, of, take, tap } from 'rxjs';
 
 import { environments } from '../../../environment/environments';
 import { Category, Product } from '@products';
@@ -35,7 +34,7 @@ export class ProductsService {
 
   getProductById(productId: string): Observable<Product | undefined> {
     if ( !productId ) throw Error('El "id" del producto es obligatoria');
-    
+
     return this._http.get<Product>(`${this.baseUrl}/products/${productId}`)
       .pipe(
         take(1)
@@ -92,11 +91,11 @@ export class ProductsService {
 
   }
 
-  createCategory() {
+  createCategory(category: Category) {
 
   }
 
-  updateCategory(categoryId: string) {
+  updateCategory(category: Category) {
 
   }
 
