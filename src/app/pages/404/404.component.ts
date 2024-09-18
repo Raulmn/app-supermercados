@@ -6,4 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `<p>Upps!</p>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class error404Component { }
+export default class Error404Component { }
